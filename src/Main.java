@@ -1,4 +1,5 @@
 import HUELampControl.HUELamp;
+import WeatherstationControl.Measurement;
 import WeatherstationControl.RawMeasurement;
 import WeatherstationControl.WeatherStation;
 import com.google.gson.JsonObject;
@@ -39,6 +40,11 @@ public class Main {
         RawMeasurement rawMeasurement = ws.getMostRecentMeasurement();
 
         System.out.println(rawMeasurement);
+
+        Measurement measurement = new Measurement();
+        System.out.println(measurement.calcTemperature(ws.getMostRecentOutsideTemp()));
+        System.out.println(measurement.calcRainFall(ws.getMostRecentRainRate()));
+        System.out.println(measurement.calcWindSpeed(ws.getMostRecentWindSpeed()));
     }
 
 
