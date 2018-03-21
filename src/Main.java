@@ -1,4 +1,6 @@
 import HUELampControl.HUELamp;
+import WeatherstationControl.RawMeasurement;
+import WeatherstationControl.WeatherStation;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
@@ -28,6 +30,16 @@ public class Main {
             e.printStackTrace();
         }
         for(int i = 0; i< lampen.size(); i++)
+        {
             System.out.println(lampen.get(i).getName());
+        }
+
+        WeatherStation ws = new WeatherStation();
+
+        RawMeasurement rawMeasurement = ws.getMostRecentMeasurement();
+
+        System.out.println(rawMeasurement);
     }
+
+
 }
