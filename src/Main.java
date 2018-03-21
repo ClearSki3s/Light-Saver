@@ -53,5 +53,23 @@ public class Main {
         */
     }
 
+    private void initGpio()
+    {
+        try {
+            Runtime.getRuntime().exec("gpio -g mode 18 out");
+            Runtime.getRuntime().exec("gpio -g mode 23 out");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void gpioControl(int pin, int engage)
+    {
+        try {
+            Runtime.getRuntime().exec("gpio -g write "+ pin + " " + engage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
