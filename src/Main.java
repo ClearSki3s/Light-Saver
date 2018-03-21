@@ -51,24 +51,17 @@ public class Main {
         System.out.println(ws.getMostRecentUVLevel());
         System.out.println(ws.getMostRecentSolarRadiation());
         */
-    }
-
-    private void initGpio()
-    {
-        try {
-            Runtime.getRuntime().exec("gpio -g mode 18 out");
-            Runtime.getRuntime().exec("gpio -g mode 23 out");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    private void gpioControl(int pin, int engage)
-    {
-        try {
-            Runtime.getRuntime().exec("gpio -g write "+ pin + " " + engage);
-        } catch (IOException e) {
-            e.printStackTrace();
+        gpioController gpio = new gpioController();
+        gpio.initGpio();
+        while(true)
+        {
+            gpio.gpioControl(18, 1);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            gpio.gpioControl(18, 0);
         }
     }
 
