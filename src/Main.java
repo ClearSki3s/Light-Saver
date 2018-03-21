@@ -17,6 +17,7 @@ import static HUELampControl.JsonConnect.readJsonFromUrl;
 
 /**
  * Created by Trist on 21-3-2018.
+ * Note: Solarrad is in Watts/m^2
  */
 public class Main {
     public static void main(String[] args) {
@@ -45,8 +46,6 @@ public class Main {
 
         RawMeasurement rawMeasurement = ws.getMostRecentMeasurement();
 
-        System.out.println(rawMeasurement);
-
         Measurement measurement = new Measurement();
         System.out.println(measurement.calcTemperature(ws.getMostRecentOutsideTemp()));
         System.out.println(measurement.calcRainFall(ws.getMostRecentRainRate()));
@@ -70,7 +69,29 @@ public class Main {
             }
         }
 
-    }
 
+
+        /*
+        System.out.println("Temp in graden: " + measurement.calcTemperature(ws.getMostRecentOutsideTemp()));
+        System.out.println("Regen hoeveelheid:" + measurement.calcRainFall(ws.getMostRecentRainRate()));
+        System.out.println("Windsnelheid in Km/u: " + measurement.calcWindSpeed(ws.getMostRecentWindSpeed()));
+        System.out.println(measurement.transformTime(ws.getMostRecentSunrise()));
+        System.out.println(measurement.transformTime(ws.getMostRecentSunset()));
+        System.out.println(ws.getMostRecentUVLevel());
+        System.out.println(ws.getMostRecentSolarRadiation());
+        */
+        gpioController gpio = new gpioController();
+        gpio.initGpio();
+        while(true)
+        {
+            gpio.gpioControl(18, 1);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            gpio.gpioControl(18, 0);
+        }
+    }
 
 }

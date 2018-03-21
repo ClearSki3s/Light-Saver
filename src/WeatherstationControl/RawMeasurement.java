@@ -5,47 +5,23 @@ public class RawMeasurement
 
     private String stationId;
     private java.sql.Timestamp dateStamp;
-    private short barometer;
-    private short insideTemp;
-    private short insideHum;
     private short outsideTemp;
     private short windSpeed;
     private short avgWindSpeed;
-    private short windDir;
-    private short outsideHum;
     private short rainRate;
-    private short UVLevel;
-    private short solarRad;
-    private short xmitBatt;
-    private short battLevel;
-    private short foreIcon;
     private short sunrise;
     private short sunset;
+    private short UVLevel;
+    private short solarRad;
     
     public RawMeasurement()
     {
     
     }
-    
-    // stationId
-    public void setStationId (String str) { this.stationId = str;};
-    public String getStationId () { return stationId; };
 
     // dateStamp
     public void setDateStamp (java.sql.Timestamp ts) { this.dateStamp = ts;};
     public java.sql.Timestamp getDateStamp () { return dateStamp; };
-
-    // barometer
-    public void setBarometer (short val) { this.barometer = val;};
-    public short getBarometer () { return barometer; }; 
-
-    // insideTemp
-    public void setInsideTemp (short val) { this.insideTemp = val;};
-    public short getInsideTemp () { return insideTemp; };   
-
-    // insideHum
-    public void setInsideHum (short val) { this.insideHum = val;};
-    public short getInsideHum () { return insideHum; }; 
 
     // outsideTemp
     public void setOutsideTemp (short val) { this.outsideTemp = val;};
@@ -59,37 +35,9 @@ public class RawMeasurement
     public void setAvgWindSpeed (short val) { this.avgWindSpeed = val;};
     public short getAvgWindSpeed () { return avgWindSpeed; };
 
-    // windDir
-    public void setWindDir (short val) { this.windDir = val;};
-    public short getWindDir () { return windDir; };
-
-    // outsideHum
-    public void setOutsideHum (short val) { this.outsideHum = val;};
-    public short getOutsideHum () { return outsideHum; };
-
     // rainRate
     public void setRainRate (short val) { this.rainRate = val;};
     public short getRainRate () { return rainRate; };
-
-    // UVLevel
-    public void setUVLevel (short val) { this.UVLevel = val;};
-    public short getUVLevel () { return UVLevel; };
-
-    // solarRad
-    public void setSolarRad (short val) { this.solarRad = val;};
-    public short getSolarRad () { return solarRad; };
-
-    // xmitBatt
-    public void setXmitBatt (short val) { this.xmitBatt = val;};
-    public short getXmitBatt () { return xmitBatt; };
-
-    // battLevel
-    public void setBattLevel (short val) { this.battLevel = val;};
-    public short getBattLevel () { return battLevel; };
-    
-    // foreIcon
-    public void setForeIcon (short val) { this.foreIcon = val;};
-    public short getForeIcon () { return foreIcon; };
 
     // sunrise
     public void setSunrise (short val) { this.sunrise = val;};
@@ -99,27 +47,26 @@ public class RawMeasurement
     public void setSunset (short val) { this.sunset = val;};
     public short getSunset () { return sunset; };
 
+    // UVLevel
+    public void setUVLevel (short val) { this.UVLevel = val;};
+    public short getUVLevel () { return UVLevel; };
+
+    // solarRad
+    public void setSolarRad (short val) { this.solarRad = val;};
+    public short getSolarRad () { return solarRad; };
+
     public String toString()
     {
         String s = "RawMeasurement:"
             + "\nstationId = " + stationId
             + "\ndateStamp = " + dateStamp
-            + "\nbarometer = " + barometer
-            + "\ninsideTemp = " + insideTemp
-            + "\ninsideHum = " + insideHum
             + "\noutsideTemp = " + outsideTemp
             + "\nwindSpeed = " + windSpeed
             + "\navgWindSpeed = " + avgWindSpeed
-            + "\nwindDir = " + windDir
-            + "\noutsideHum = " + outsideHum
             + "\nrainRate = " + rainRate
-            + "\nUVLevel = " + UVLevel
-            + "\nsolarRad = " + solarRad
-            + "\nxmitBatt = " + xmitBatt
-            + "\nbattLevel = " + battLevel
-            + "\nforeIcon = " + foreIcon
             + "\nsunrise = " + sunrise
-            + "\nsunset = " + sunset;
+            + "\nsunset = " + sunset
+            + "\nuvlevel = " + UVLevel;
         return s; 
     } 
     

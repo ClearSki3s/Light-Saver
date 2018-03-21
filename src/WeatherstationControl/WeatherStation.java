@@ -43,26 +43,6 @@ public class WeatherStation
         }
     }
 
-
-    //MostRecent methodes
-    public short getMostRecentBarometer()
-    {
-        return getMostRecentMeasurement().getBarometer();
-
-    }
-
-    public short getMostRecentInsideTemp()
-    {
-        return getMostRecentMeasurement().getInsideTemp();
-
-    }
-
-    public short getMostRecentInsideHum()
-    {
-        return getMostRecentMeasurement().getInsideHum();
-
-    }
-
     public short getMostRecentOutsideTemp()
     {
         return getMostRecentMeasurement().getOutsideTemp();
@@ -78,39 +58,9 @@ public class WeatherStation
         return getMostRecentMeasurement().getAvgWindSpeed();
     }
 
-    public short getMostRecentWindDir()
-    {
-        return getMostRecentMeasurement().getWindDir();
-    }
-
-    public short getMostRecentOutsideHum()
-    {
-        return getMostRecentMeasurement().getOutsideHum();
-    }
-
     public short getMostRecentRainRate()
     {
         return getMostRecentMeasurement().getRainRate();
-    }
-
-    public short getMostRecentUVLevel()
-    {
-        return getMostRecentMeasurement().getUVLevel();
-    }
-
-    public short getMostRecentSolarRadiation()
-    {
-        return getMostRecentMeasurement().getSolarRad();
-    }
-
-    public short getMostRecentXmitBatt()
-    {
-        return getMostRecentMeasurement().getXmitBatt();
-    }
-
-    public short getMostRecentBattLevel()
-    {
-        return getMostRecentMeasurement().getBattLevel();
     }
 
     public short getMostRecentSunrise()
@@ -121,6 +71,16 @@ public class WeatherStation
     public short getMostRecentSunset()
     {
         return getMostRecentMeasurement().getSunset();
+    }
+
+    public short getMostRecentUVLevel()
+    {
+        return getMostRecentMeasurement().getUVLevel();
+    }
+
+    public short getMostRecentSolarRadiation()
+    {
+        return getMostRecentMeasurement().getSolarRad();
     }
 
     //MostRecent everything
@@ -153,24 +113,15 @@ public class WeatherStation
             ResultSet rs = s.getResultSet();
             while( rs.next() )
             {
-                m.setStationId( rs.getString("stationId") );
                 m.setDateStamp( rs.getTimestamp(2));
-                m.setBarometer( Short.valueOf(rs.getString("barometer")) );
-                m.setInsideTemp( Short.valueOf(rs.getString("insideTemp")) );
-                m.setInsideHum( Short.valueOf(rs.getString("insideHum")) );
                 m.setOutsideTemp( Short.valueOf(rs.getString("outsideTemp")) );
                 m.setWindSpeed( Short.valueOf(rs.getString("windSpeed")) );
                 m.setAvgWindSpeed( Short.valueOf(rs.getString("avgWindSpeed")) );
-                m.setWindDir( Short.valueOf(rs.getString("windDir")) );
-                m.setOutsideHum( Short.valueOf(rs.getString("outsideHum")) );
                 m.setRainRate( Short.valueOf(rs.getString("rainRate")) );
-                m.setUVLevel( Short.valueOf(rs.getString("UVLevel")) );
-                m.setSolarRad( Short.valueOf(rs.getString("solarRad")) );
-                m.setXmitBatt( Short.valueOf(rs.getString("xmitBatt")) );
-                m.setBattLevel( Short.valueOf(rs.getString("battLevel")) );
-//              m.setForeIcon( Short.valueOf(rs.getString("foreIcon")) );
                 m.setSunrise( Short.valueOf(rs.getString("sunrise")) );
                 m.setSunset( Short.valueOf(rs.getString("sunset")) );
+                m.setUVLevel( Short.valueOf(rs.getString("UVLevel")) );
+                m.setSolarRad( Short.valueOf(rs.getString("solarRad")) );
             }
             rs.close();
             s.close();

@@ -22,27 +22,37 @@ public class Measurement {
         return ((mval / 10) - 32) / 1.8;
     }
 
-    /**
-     * Calculate the windspeed
-     *
-     * @param mval  Raw value from weatherstation
-     * @return The windspeed in km/h
-     * @since 1.0
-     */
+
+    //Calculate the windspeed
     public static double calcWindSpeed(short mval)
     {
         return mval * 1.609344;
     }
 
-    /**
-     * Calculate the amount of rain
-     *
-     * @param mval  Raw value from weatherstation
-     * @return The amount of rain in mm
-     * @since 1.0
-     */
+
+    //Calculate the amount of rain
     public static double calcRainFall(short mval)
     {
         return mval * 0.2;
+    }
+
+    //Transform data into readable string
+    public static String transformTime(short mval)
+    {
+        if(mval == 0)
+        {
+            return "not available";
+        }
+
+        String mvalString = Short.toString(mval);
+        if(mvalString.length() == 3)
+        {
+            mvalString = "0" + mvalString;
+        }
+
+        String hourString = mvalString.substring(0,2);
+        String minuteString = mvalString.substring(2,4);
+
+        return hourString + ":" + minuteString;
     }
 }
