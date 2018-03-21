@@ -13,32 +13,10 @@ import java.util.List;
 
 public class HUELamp implements Serializable {
 
-    public JsonObject getJson() {
-        return json;
-    }
-
-    private JsonObject json;
     private static transient JsonObject state;
     private String id;
     private boolean on;
     private int bri;
-
-    public void setOn(boolean on) {
-        this.on = on;
-    }
-
-    public void setBri(int bri) {
-        this.bri = bri;
-    }
-
-    public void setHue(int hue) {
-        this.hue = hue;
-    }
-
-    public void setSat(int sat) {
-        this.sat = sat;
-    }
-
     private int hue;
     private int sat;
     private String effect;
@@ -51,7 +29,6 @@ public class HUELamp implements Serializable {
     public HUELamp(JsonObject json, String key) {
 
         try {
-            this.json = json;
             id = key;
             state = json.getAsJsonObject("state");
             on = state.get("on").getAsBoolean();
