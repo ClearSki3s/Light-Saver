@@ -39,13 +39,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(int i = 0; i< lampen.size(); i++)
-        {
-            //System.out.println(lampen.get(i).getName());
-            lampen.get(i).setBri(254);
-            lampen.get(i).setHue(254);
-            lampen.get(i).setSat(43690);
-        }
+        
 
         WeatherStation ws = new WeatherStation();
 
