@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.2" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.46-bin" level="project" />
+    <orderEntry type="library" name="com.google.http-client:google-http-client-gson:1.20.0" level="project" />
   </component>
 </module>
