@@ -5,6 +5,7 @@ import java.io.IOException;
  */
 public class gpioController {
 
+    //Runs pi command to initialize gpio pins
     public void initGpio() {
         try {
             Runtime.getRuntime().exec("gpio -g mode 18 out");
@@ -15,6 +16,18 @@ public class gpioController {
 
     }
 
+    //Turns all used pins off
+    public void gpioReset()
+    {
+        try {
+            Runtime.getRuntime().exec("gpio -g write 18 0");
+            Runtime.getRuntime().exec("gpio -g write 23 0");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Allows us to turn any specific pin on or off
     public void gpioControl(int pin, int engage) {
         try {
             Runtime.getRuntime().exec("gpio -g write " + pin + " " + engage);

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import HUELampControl.HUELamp;
 import com.google.gson.*;
-import com.google.api.client.http.*;
+//import com.google.api.client.http.*;
 import com.sun.deploy.net.HttpResponse;
 
 import javax.xml.ws.Response;

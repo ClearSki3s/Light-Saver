@@ -23,6 +23,7 @@ import static HUELampControl.JsonConnect.readJsonFromUrl;
  */
 public class Main {
     public static void main(String[] args) {
+        //Connects to both HUE lamps and Weatherstation Database
         JsonConnect jsonConnect = new JsonConnect();
         String url = "http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB/lights";
         ArrayList<HUELamp> lampen;
@@ -32,6 +33,11 @@ public class Main {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         lampen = new ArrayList<>();
+
+        //Controls GPIO pins
+        gpioController gpio = new gpioController();
+        gpio.initGpio();
+
         WeatherStation ws = new WeatherStation();
         while (true) {
             try {
@@ -51,6 +57,10 @@ public class Main {
             System.out.println(measurement.calcRainFall(ws.getMostRecentRainRate()));
             System.out.println(measurement.calcWindSpeed(ws.getMostRecentWindSpeed()));
 
+            //Resets GPIO pins
+            gpio.gpioReset();
+
+            //Controls lamps depending on sunlight
             if (ws.getMostRecentUVLevel() > 5) {
                 for (int i = 0; i < lampen.size(); i++) {
                     json = new JsonObject();
@@ -83,6 +93,7 @@ public class Main {
                 }
             }
 
+            //Makes lamps blue when it rains
             if (measurement.calcRainFall(ws.getMostRecentRainRate()) > 1) {
                 for (int i = 0; i < lampen.size(); i++) {
                     json = new JsonObject();
@@ -95,12 +106,15 @@ public class Main {
 
                     jsonString = json.toString();
 
+                    gpio.gpioControl(18, 1);
+
                     try {
                         jsonConnect.writeJsonToUrl(url, jsonString);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
+            //Makes lamps red when it's hot outside
             } else if (measurement.calcTemperature(ws.getMostRecentOutsideTemp()) > 20) {
                 for (int i = 0; i < lampen.size(); i++) {
                     json = new JsonObject();
@@ -110,6 +124,8 @@ public class Main {
                     json.addProperty("hue", 1);
                     json.addProperty("sat", 254);
                     System.out.println(i + ": " + json);
+
+                    gpio.gpioControl(23, 1);
 
                     jsonString = json.toString();
 
@@ -121,30 +137,6 @@ public class Main {
                 }
             }
 
-
-
-        /*
-        System.out.println("Temp in graden: " + measurement.calcTemperature(ws.getMostRecentOutsideTemp()));
-        System.out.println("Regen hoeveelheid:" + measurement.calcRainFall(ws.getMostRecentRainRate()));
-        System.out.println("Windsnelheid in Km/u: " + measurement.calcWindSpeed(ws.getMostRecentWindSpeed()));
-        System.out.println(measurement.transformTime(ws.getMostRecentSunrise()));
-        System.out.println(measurement.transformTime(ws.getMostRecentSunset()));
-        System.out.println(ws.getMostRecentUVLevel());
-        System.out.println(ws.getMostRecentSolarRadiation());
-
-        gpioController gpio = new gpioController();
-        gpio.initGpio();
-        while(true)
-        {
-            gpio.gpioControl(18, 1);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            gpio.gpioControl(18, 0);
-        }
-        */
             try {
                 Thread.sleep(60000);
             } catch (InterruptedException e) {
