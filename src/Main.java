@@ -51,7 +51,7 @@ public class Main {
             System.out.println(measurement.calcRainFall(ws.getMostRecentRainRate()));
             System.out.println(measurement.calcWindSpeed(ws.getMostRecentWindSpeed()));
 
-            if (measurement.transformTime(ws.getMostRecentSunrise()).equals(sdf.format(cal.getTime()))) {
+            if (ws.getMostRecentUVLevel() > 5) {
                 for (int i = 0; i < lampen.size(); i++) {
                     json = new JsonObject();
                     url = "http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB/lights/" + lampen.get(i).getId() + "/state";
@@ -66,7 +66,7 @@ public class Main {
                         e.printStackTrace();
                     }
                 }
-            } else if (measurement.transformTime(ws.getMostRecentSunset()).equals(sdf.format(cal.getTime()))) {
+            } else{
                 for (int i = 0; i < lampen.size(); i++) {
                     json = new JsonObject();
                     url = "http://145.48.205.33/api/iYrmsQq1wu5FxF9CPqpJCnm1GpPVylKBWDUsNDhB/lights/" + lampen.get(i).getId() + "/state";
